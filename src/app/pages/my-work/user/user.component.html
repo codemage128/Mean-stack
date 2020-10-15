@@ -1,0 +1,95 @@
+<div class="row">
+    <div class="col-md-8">
+        <nb-card>
+            <nb-card-header>User Table</nb-card-header>
+            <nb-card-body>
+                <div class="horizontal-scroll">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Sex</th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Birth</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let u of userList; let i = index;">
+                                <td class="text-center">{{i + 1}}</td>
+                                <td class="text-center">{{ u.name }}</td>
+                                <td class="text-center">{{ u.sex == "w" ? "Woman" : "Man"}}</td>
+                                <td class="text-center">{{ u.email }}</td>
+                                <td class="text-center">{{ u.birth | date:"MM/dd/yyyy" }}</td>
+                                <td class="text-center">
+                                    <div class="d-inline-flex">
+                                        <button class="btn btn-primary btn-tn btn-icon mr-3" type="button" (click)="editUser(u)">
+                                            <i class="ion-edit"></i>
+                                        </button>
+                                        <button class="btn btn-danger btn-tn btn-icon" type="button" (click)="deleteUser(u)">
+                                            <i class="ion-trash-a"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+    <div class="col-md-4">
+        <nb-card>
+            <nb-card-header>User Edit</nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="name">Name </label>
+                            <input type="text" class="form-control" id="name" placeholder="Name" required [(ngModel)]="user.name">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="email">Email </label>
+                            <input type="email" class="form-control" id="name" placeholder="Email" required [(ngModel)]="user.email">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="gender" style="margin-right:10px">Gender </label>
+                            <label class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" name="sex" checked="{{ user.sex == 'm' ? 'checked': ''}}" value="m"
+                                    #man (click)="user.sex = man.value">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Man</span>
+                            </label>
+                            <label class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" name="sex" checked="{{ user.sex == 'w' ? 'checked': ''}}" value="w" #woman (click)="user.sex = woman.value">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Woman</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="birth">Birth </label>
+                            <input type="date" class="form-control" id="birth" placeholder="Birth" required  [(ngModel)]="user.birth">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" (click)="saveUser()">Save</button>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
+
+
+<toaster-container></toaster-container>

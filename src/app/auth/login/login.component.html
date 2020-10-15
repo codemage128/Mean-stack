@@ -1,0 +1,50 @@
+<h1 class="text-center">SIGN IN</h1>
+<h6 class="form-text text-center mb-4">Hello! Sign in To CNS Work</h6>
+<form [formGroup]="form" (ngSubmit)="doLogin(form.value)">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <input type="text" class="form-control" [formControl]="email" [ngClass]="{'form-control-danger': (!email.valid && email.touched), 'form-control-success': (email.valid && email.touched)}"
+                  placeholder="Email">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <input type="password" class="form-control" [formControl]="password"  [ngClass]="{'form-control-danger': (!password.valid && password.touched), 'form-control-success': (password.valid && password.touched)}" placeholder="Password">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="checkbox">
+                    <nb-checkbox>Remember me</nb-checkbox>
+                    <!-- <a class="forgot-password pull-right">Forgot Password?</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <button class="btn btn-block btn-hero-success" [disabled]="!form.valid">
+                    Sign In
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row">
+    <div class="col-sm-12">
+        <p class="text-body">
+            Don't have an account?
+            <a routerLink="/auth/register">
+                <strong>Sign Up</strong>
+            </a>
+        </p>
+    </div>
+</div>
+
+<toaster-container></toaster-container>

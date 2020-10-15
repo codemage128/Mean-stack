@@ -1,0 +1,67 @@
+<div class="row mb-4">
+    <div class="col-md-8 offset-md-1">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for..." #searchinput>
+            <span class="input-group-btn">
+                <button class="btn btn-danger" (click)="searchProject(searchinput.value)">
+                    Search
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <button type="button" class="btn btn-danger btn-icon" (click)="addProject()">
+            <i class="nb-plus"></i>
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10 offset-md-1">
+        <nb-card>
+            <nb-card-header>Project Table</nb-card-header>
+            <nb-card-body>
+                <div class="horizontal-scroll">
+                    <!-- <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
+                    </ng2-smart-table> -->
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th class="text-center">Title</th>
+                                <th class="text-center">Expiration</th>
+                                <th class="text-center">Attendent</th>
+                                <th class="text-center">Created By</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let p of projectList; let i = index;">
+                                <td class="text-center">{{i + 1}}</td>
+                                <td class="text-center">{{p.title}}</td>
+                                <td class="text-center">{{p.exp_date | date: "MM/dd/yyyy"}}</td>
+                                <td class="text-center">
+                                    <span *ngFor="let u of p.attendent">
+                                        {{ u.name }}
+                                    </span>
+                                </td>
+                                <td class="text-center">{{p.created_by?.name}}</td>
+                                <td class="text-center">
+                                    <button class="btn btn-hero-info btn-tn" type="button" *ngIf="p.status == 0">GOING ON</button>
+                                    <button class="btn btn-hero-danger btn-tn" type="button" *ngIf="p.status == 1">FAIL</button>
+                                    <button class="btn btn-hero-success btn-tn" type="button" *ngIf="p.status == 2">COMPLETE</button>
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-hero-danger btn-tn" type="button" *ngIf="p.status == 0" (click)="cancelProject(p)">Cancel</button>
+                                    <button class="btn btn-hero-info btn-tn" type="button" *ngIf="p.status == 0" (click)="completeProject(p)">Complete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
+
+<toaster-container></toaster-container>
